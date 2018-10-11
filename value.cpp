@@ -28,24 +28,25 @@ void value_iteration(vector < pair<float,vector<int> > > states) {
     for (int i = 0; i < states.size(); i++) {
       for (int j = 0; j < states[i].second.size(); j++) {
         float r = 0.0f;
+        // reward is 100 for s6->s3
         if (i == 5 && states[i].second[j] == -3) {
-          //cout << 100 << endl;
           r = 100;
         }
+        // reward is 50 for s2->s3
         if (i == 1 && states[i].second[j] == 1) {
-          //cout << 50 << endl;
           r = 50;
         }
         int direction = (states[i].second[j]);
         float s_val = value_s(0.8f, r, states[i+direction].first);
-        //float s_val = 0.0f;
+        // if new value > current, then update
         if (s_val > states[i].first) {
           states[i].first = s_val;
           count++;
         }
       }
     }
-    //cout << fixed << setprecision(6) << setfill(' ');
+
+    // print out grid
     for (int i = 0; i < 2; i++) {
       for (int j = 0 + i*3; j < 3 + i*3; j++) {
         cout << "| ";
@@ -59,32 +60,26 @@ void value_iteration(vector < pair<float,vector<int> > > states) {
 }
 
 
-
-/*
-
-  - -3 -> UP
-  - +1 -> RIGHT
-  - +3 -> DOWN
-  - -1 -> LEFT
-
-*/
-
-// 0 1 2
-// 3 4 5
-
 int main () {
-  float y = 0.8f;
-  float r = 0;
-  float threshold;
-  float P = 1;
-  //pair
+
+  float y = 0.8f; // discount factor
+
+  /*
+     -3 -> UP
+      1 -> RIGHT
+      3 -> DOWN
+     -1 -> LEFT
+  */
+
+  // set state directions
   vector <int> s1_dir = {3,1};
   vector <int> s2_dir = {-1,3,1};
-  vector <int> s3_dir = {0};
+  vector <int> s3_dir = {0};  // terminal state
   vector <int> s4_dir = {-3,1};
   vector <int> s5_dir = {-1,-3,1};
   vector <int> s6_dir = {-1,-3};
 
+  // initial state values paired with directions
   pair< float , vector<int> > s1(0.0f,s1_dir);
   pair< float , vector<int> > s2(0.0f,s2_dir);
   pair< float , vector<int> > s3(0.0f,s3_dir);
@@ -113,22 +108,5 @@ int main () {
   cout << endl;
 
   value_iteration(states);
-
-
-
-/*
-  for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 3; j++) {
-      //grid.push_back(0.0f);
-    }
-  }
-
-  for (int i = 0; i < 2; i++) {
-    for (int j = 0 + i*3; j < 3 + i*3; j++) {
-      cout << "| " << states[j].first << j << " |";
-    }
-    cout << endl << "===============" << endl;
-  }
-  */
 
 }
