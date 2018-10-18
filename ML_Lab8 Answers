@@ -1,0 +1,30 @@
+## ADDBRA001
+## Brandon Addison
+## CSC3022H
+## ML Lab 8
+
+Question 1: How many iterations does it take for the Value Iteration algorithm
+to converge? In an output text file list the optimal values (V∗ for each state).
+
+- 5 iterations for value iteration algorithm to converge.
+
+- Optimal values:
+s1 = 51.2  s2 = 64  s3 = 0
+s4 = 64    s5 = 80  s6 = 100
+
+=========================================================================
+
+Question 2: Assume we start in state s1, give the states that form the
+optimal policy (π∗) to reach the terminal state (s3).
+
+s1 -> s2 -> s5 -> s6 -> s3
+
+
+========================================================================
+
+Question 3: Is it possible to change the reward function function so that
+V∗ changes, but the optimal policy (π∗) remains unchanged?
+
+Yes, you can increase the reward for s6->s3 as this reward remains unchanged
+after the first iteration as it's always the optimal path for s6.  Therefore
+increasing this reward will not change the optimal policy.
